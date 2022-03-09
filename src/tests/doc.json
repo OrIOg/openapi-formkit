@@ -1,0 +1,77 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Simple API overview",
+		"version": "1.0"
+	},
+	"paths": {
+		"/list-examples": {
+			"get": {
+				"operationId": "listExamples",
+				"summary": "List demo examples",
+				"responses": {
+					"200": {
+						"description": "200 response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+										"items": {
+											"type": "string"
+										}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/get-example": {
+			"get": {
+				"operationId": "getExample",
+				"summary": "get example data",
+				"parameters":  [{
+					"in": "query",
+					"name": "example",
+					"required": true,
+					"schema" : {
+						"type": "string"
+					}
+				},{
+					"in": "query",
+					"name": "test-number",
+					"required": true,
+					"schema" : {
+						"type": "number",
+						"maximum": 17
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "200 response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref" : "#/components/schemas/Example"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Example": {
+				"description": "Example obj",
+				"type": "object",
+				"properties": {
+					"name": {"type": "string"},
+					"description": {"type": "string"}
+				},
+				"required": ["name", "description"]
+			}
+		}
+	}
+}
