@@ -5,12 +5,11 @@
   "main": "index.ts",
   "author": "Thibault Poisson",
   "license": "MIT",
-  "type": "module",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "dev": "tsnd --respawn --files index.ts",
+    "dev": "tsnd --respawn --files src/index.ts",
     "test": "jest"
   },
   "devDependencies": {
