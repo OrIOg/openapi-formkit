@@ -1,7 +1,6 @@
 import { reader } from "@oats-ts/openapi-reader"
 import { isReferenceObject } from "@oats-ts/model-common"
-import { convertNumber } from "./converters"
-
+import { convertNumber, convertString } from "./converters"
 
 export async function Convert(path: string) {
     const apiReader = await reader({path})();
@@ -20,6 +19,9 @@ export async function Convert(path: string) {
                     case 'integer':
                         parameters.push(convertNumber(param, param.schema));
                         break;
+                    case 'string':
+                        parameters.push(convertString(param, param.schema));
+                        break;
                     default:
                         console.warn(`'${param.schema?.type}' is not yet implemented`);
                         break;
@@ -29,5 +31,6 @@ export async function Convert(path: string) {
         }
             
     }
+
     return parameters;
 }
