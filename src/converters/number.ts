@@ -7,37 +7,37 @@ export function isInteger(value: number, format: string | undefined) {
 }
 
 export function convertNumber(param: ParameterObject, schema: SchemaObject) {
-    let obj = {
-        placeholder: getPlaceholderFromExamples(param)
-    } as {
-        required?: boolean;
-        placeholder?: string;
-        min?: number;
-        max?: number;
-    };
+
     const required = param.required ? true : undefined;
 
-    const min = schema.minimum;
+    let min = schema.minimum;
     if (min)
-        obj.min = min + (schema.exclusiveMinimum ? (isInteger(min, schema.format) ? 1 : Number.MIN_VALUE) : min);
+        min = min + (schema.exclusiveMinimum ? (isInteger(min, schema.format) ? 1 : Number.MIN_VALUE) : min);
     
-    const max = schema.maximum;
+    let max = schema.maximum;
     if (max)
-        obj.max = max + (schema.exclusiveMaximum ? (isInteger(max, schema.format) ? 1 : Number.MIN_VALUE) : max);
+        max = max + (schema.exclusiveMaximum ? (isInteger(max, schema.format) ? 1 : Number.MIN_VALUE) : max);
+
+    const validation = []
+    if(required) validation.push("required")
+
+    const placeholders = getPlaceholderFromExamples(param);
+
+    let props = {
+        type: 'number',
+        name: param.name,
+        label: param.name
+    } as Record<string, any>
+
+    if(placeholders) props.placeholder = placeholders;
+    if(validation) props.validation = validation.join('|');
+    if(param.description) props.help = param.description;
+    if(min) props.min = min;
+    if(max) props.max = max;
+
 
     return {
         $cmp: 'FormKit',
-        props: {
-            type: 'number',
-            help: param.description,
-            label: param.name,
-            name: param.name,
-            placeholder: obj.placeholder,
-            validation: [
-                required ? "required" : undefined,
-            ].join('|') || undefined,
-            min,
-            max
-        }
+        props
     };
 }
