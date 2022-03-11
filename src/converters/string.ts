@@ -1,8 +1,8 @@
-import { ParameterObject } from "@oats-ts/openapi-model";
-import { SchemaObject } from "@oats-ts/json-schema-model";
+import { FormKitInput, InputProps, Parameter } from './../types/index.d';
 import { getPlaceholderFromExamples } from "./util";
 
-export function convertString(param: ParameterObject, schema: SchemaObject) {
+export function convertString(param: Parameter): FormKitInput {
+    const schema = param.schema;
     let type = "text";
     if(schema.format) {
         switch(schema.format) {
@@ -21,6 +21,9 @@ export function convertString(param: ParameterObject, schema: SchemaObject) {
             case 'binary':
                 type = "file"
                 break;
+            default:
+                console.warn(`'${schema.type}:${schema.type}' is not yet implemented`); 
+                break
         }
     }
 
@@ -30,7 +33,7 @@ export function convertString(param: ParameterObject, schema: SchemaObject) {
 
     const validation = []
     if(required) validation.push("required")
-    if(min||max) validation.push(`length:${min||0},${max}`)
+    if(min||max) validation.push(`length:${min||0},${max||''}`)
     if(["email", "url"].includes(type)) validation.push(type);
 
     const placeholders = getPlaceholderFromExamples(param);
@@ -39,8 +42,9 @@ export function convertString(param: ParameterObject, schema: SchemaObject) {
         type,
         name: param.name,
         label: param.name
-    } as Record<string, string>
+    } as InputProps
 
+    if(schema.default) props.value = schema.default;
     if(placeholders) props.placeholder = placeholders;
     if(validation) props.validation = validation.join('|');
     if(param.description) props.help = param.description

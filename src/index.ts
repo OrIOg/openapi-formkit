@@ -1,36 +1,30 @@
-import { reader } from "@oats-ts/openapi-reader"
-import { isReferenceObject } from "@oats-ts/model-common"
-import { convertNumber, convertString } from "./converters"
+import { FormKitItem } from './types/index.d';
+import SwaggerParser from "@apidevtools/swagger-parser"
+import { readParameters, readRequestBody } from './converters/util';
+import { OpenAPIObject, PathItemObject } from 'openapi3-ts';
 
-export async function Convert(path: string) {
-    const apiReader = await reader({path})();
-    if (!apiReader.isOk) throw apiReader.issues
+export async function Convert(api: string) {
+    let parser = new SwaggerParser()
+    let obj = await parser.dereference(api) as OpenAPIObject;
 
-    let parameters = [];
+    let pathsParameters = {} as Record<string, FormKitItem[]>;
     
-    for(let k in apiReader.data!.document.paths) {
-        const path = apiReader.data!.document.paths[k];
-        if(path.get?.parameters) {
-            for(let param of path.get?.parameters!) {
-                if(isReferenceObject(param) || isReferenceObject(param.schema)) continue;
-
-                switch (param.schema?.type) {
-                    case 'number':
-                    case 'integer':
-                        parameters.push(convertNumber(param, param.schema));
-                        break;
-                    case 'string':
-                        parameters.push(convertString(param, param.schema));
-                        break;
-                    default:
-                        console.warn(`'${param.schema?.type}' is not yet implemented`);
-                        break;
-                
-                }
+    for(let route in obj.paths) {
+        const path = obj.paths[route] as PathItemObject
+        let parameters = [] as FormKitItem[];
+        
+        const opTypes = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options', 'trace'];
+        for (const op of opTypes) {
+            if(path[op] && path[op].parameters) {
+                parameters = readParameters(path[op].parameters);
+            }
+            if(path[op] && path[op].requestBody) {
+                parameters = readRequestBody(path[op].requestBody);
             }
         }
-            
+
+        pathsParameters[route] = parameters; 
     }
 
-    return parameters;
+    return pathsParameters;
 }

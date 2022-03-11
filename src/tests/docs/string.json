@@ -1,0 +1,90 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Number test",
+		"version": "1.0"
+	},
+	"paths": {
+		"/get-example": {
+			"get": {
+				"operationId": "getExample",
+				"summary": "get example data",
+				"parameters":  [{
+					"in": "query",
+					"name": "min",
+					"required": true,
+					"schema" : {
+						"type": "string",
+						"minLength": 3
+					}
+				},{
+					"in": "query",
+					"name": "max",
+					"required": true,
+					"schema" : {
+						"type": "string",
+						"maxLength": 3
+					}
+				},{
+					"in": "query",
+					"name": "minmax",
+					"required": true,
+					"schema" : {
+						"type": "string",
+						"minLength": 3,
+						"maxLength": 14
+					}
+				},{
+					"in": "query",
+					"name": "email",
+					"required": true,
+					"schema" : {
+						"type": "string",
+						"format": "email"
+					}
+				},{
+					"in": "query",
+					"name": "telephone",
+					"required": true,
+					"schema" : {
+						"type": "string",
+						"format": "telephone"
+					}
+				},{
+					"in": "query",
+					"name": "url",
+					"required": true,
+					"schema" : {
+						"type": "string",
+						"format": "url"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "200 response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref" : "#/components/schemas/Example"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Example": {
+				"description": "Example obj",
+				"type": "object",
+				"properties": {
+					"name": {"type": "string"},
+					"description": {"type": "string"}
+				},
+				"required": ["name", "description"]
+			}
+		}
+	}
+}

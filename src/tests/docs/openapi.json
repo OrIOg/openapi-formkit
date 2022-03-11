@@ -1,0 +1,143 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "Webmediat",
+      "version": "1.0"
+    },
+    "paths": {
+      "/cartoon/": {
+        "post": {
+          "summary": "Get Cartoon",
+          "operationId": "get_cartoon_cartoon__post",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body_get_cartoon_cartoon__post"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                }
+              }
+            },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HTTPValidationError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Body_get_cartoon_cartoon__post": {
+          "title": "Body_get_cartoon_cartoon__post",
+          "required": [
+            "file",
+            "parameters"
+          ],
+          "type": "object",
+          "properties": {
+            "file": {
+              "title": "File",
+              "type": "string",
+              "description": "Image to be cartoonised",
+              "format": "binary"
+            },
+            "parameters": {
+              "$ref": "#/components/schemas/Parameters"
+            }
+          }
+        },
+        "HTTPValidationError": {
+          "title": "HTTPValidationError",
+          "type": "object",
+          "properties": {
+            "detail": {
+              "title": "Detail",
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ValidationError"
+              }
+            }
+          }
+        },
+        "Parameters": {
+          "title": "Parameters",
+          "type": "object",
+          "properties": {
+            "smoothness": {
+              "title": "Smoothness",
+              "type": "integer",
+              "default": 3
+            },
+            "sharpening": {
+              "title": "Sharpening",
+              "type": "integer",
+              "default": 150
+            },
+            "threshold": {
+              "title": "Threshold",
+              "type": "integer",
+              "default": 20
+            },
+            "thickness": {
+              "title": "Thickness",
+              "type": "number",
+              "default": 0.25
+            },
+            "color": {
+              "title": "Color",
+              "type": "number",
+              "default": 1.5
+            },
+            "quantization": {
+              "title": "Quantization",
+              "type": "integer",
+              "default": 8
+            }
+          }
+        },
+        "ValidationError": {
+          "title": "ValidationError",
+          "required": [
+            "loc",
+            "msg",
+            "type"
+          ],
+          "type": "object",
+          "properties": {
+            "loc": {
+              "title": "Location",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "msg": {
+              "title": "Message",
+              "type": "string"
+            },
+            "type": {
+              "title": "Error Type",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
