@@ -9,6 +9,7 @@ export async function Convert(api: string) {
 
     let pathsParameters = {} as Record<string, FormKitItem[]>;
     
+    // TODO: Add Common parameters: https://swagger.io/docs/specification/describing-parameters
     for(let route in obj.paths) {
         const path = obj.paths[route] as PathItemObject
         let parameters = [] as FormKitItem[];

@@ -40,7 +40,7 @@ export function readObject(param: Parameter): FormKitGroup {
     let schema = (param.schema as SchemaObject);
     for (const propertyName in schema.properties) {
         const property = schema.properties[propertyName] as SchemaObject;
-        const name = property.title||propertyName
+        const name = propertyName
         const converted = readParameter({schema: property, name});
         if(converted) convertedParams.push(converted);
     }
@@ -69,7 +69,7 @@ export function readRequestBody(body: RequestBodyObject) {
         let schema = (media.schema as SchemaObject);
         for (const propertyName in schema.properties) {
             const property = schema.properties[propertyName] as SchemaObject;
-            const name = property.title||propertyName
+            const name = propertyName
             const converted = readParameter({schema: property, name}) as FormKitInput;
             if(converted) { 
                 if (schema.required && propertyName in schema.required)
