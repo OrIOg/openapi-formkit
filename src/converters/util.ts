@@ -1,7 +1,6 @@
 import { ParameterObject, RequestBodyObject, SchemaObject } from 'openapi3-ts';
+import { convertBoolean, convertNumber, convertString } from '.';
 import { FormKitGroup, FormKitItem, Parameter, FormKitInput } from './../types/index.d';
-import { convertNumber } from './number';
-import { convertString } from './string';
 
 export function readParameter(param: Parameter): FormKitItem | undefined {
     const schema = param.schema;
@@ -11,6 +10,8 @@ export function readParameter(param: Parameter): FormKitItem | undefined {
             return convertNumber(param);
         case 'string':
             return convertString(param);
+        case 'boolean':
+            return convertBoolean(param);
         case 'object':
             return readObject(param);
         default:
