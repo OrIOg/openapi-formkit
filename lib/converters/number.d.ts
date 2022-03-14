@@ -1,3 +1,3 @@
 import { Parameter, FormKitInput } from "../types";
-export declare function isInteger(value: number, format: string | undefined): boolean;
+export declare function isInteger(param: Parameter): boolean;
 export declare function convertNumber(param: Parameter): FormKitInput;
