@@ -1,21 +1,22 @@
 import { InputProps, Parameter, FormKitInput } from "../types";
 import { getPlaceholderFromExamples } from "./util";
 
-export function isInteger(value: number, format: string | undefined) {
-    return format ? !(format in ["float", "double"]) : Number.isInteger(value)  
+export function isInteger(param: Parameter) {
+    return param.schema.type == "integer"  
 }
 
 export function convertNumber(param: Parameter): FormKitInput {
     const schema = param.schema;
     const required = param.required ? true : undefined;
+    const isInt = isInteger(param);
 
     let min = schema.minimum;
     if (min)
-        min = min + (schema.exclusiveMinimum ? (isInteger(min, schema.format) ? 1 : Number.MIN_VALUE) : 0);
+        min = min + (schema.exclusiveMinimum ? (isInt ? 1 : Number.MIN_VALUE) : 0);
     
     let max = schema.maximum;
     if (max)
-        max = max + (schema.exclusiveMaximum ? (isInteger(max, schema.format) ? 1 : Number.MIN_VALUE) : 0);
+        max = max + (schema.exclusiveMaximum ? (isInt ? 1 : Number.MIN_VALUE) : 0);
 
     const validation = []
     if(required) validation.push("required")
