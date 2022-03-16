@@ -26,7 +26,7 @@ export function convertNumber(param: Parameter): FormKitInput {
     let props = {
         type: 'number',
         name: param.name,
-        label: param.name
+        label: schema.title
     } as InputProps
 
     if(schema.default) props.value = schema.default;

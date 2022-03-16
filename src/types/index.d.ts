@@ -43,3 +43,14 @@ export interface UniversalProps {
     validationRules?: Object
     value?: any
 }
+
+export interface Route {
+    $cmp: "FormKit"
+    props: {
+        type: "form",
+        method: method
+    }
+    children: FormKitItem[]
+}
+
+export type method = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options' | 'trace';

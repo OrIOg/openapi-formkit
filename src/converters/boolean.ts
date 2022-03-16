@@ -14,7 +14,7 @@ export function convertBoolean(param: Parameter): FormKitInput {
     let props = {
         type: 'checkbox',
         name: param.name,
-        label: param.name
+        label: schema.title
     } as InputProps
 
     if(schema.default) props.value = schema.default;

@@ -1,9 +1,37 @@
 import { ParameterObject, RequestBodyObject, SchemaObject } from 'openapi3-ts';
 import { convertBoolean, convertNumber, convertString } from '.';
-import { FormKitGroup, FormKitItem, Parameter, FormKitInput } from './../types/index.d';
+import { FormKitGroup, FormKitItem, Parameter, FormKitInput, InputProps } from './../types/index.d';
+
+export function readEnum(param: Parameter): FormKitItem {
+    const schema = param.schema;
+    const required = param.required ? true : undefined;
+
+    const validation = []
+    if(required) validation.push("required")
+
+    const placeholders = getPlaceholderFromExamples(param);
+
+    let props = {
+        type: 'select',
+        name: param.name,
+        label: schema.title,
+        options: param.schema.enum
+    } as InputProps
+
+    if(schema.default) props.value = schema.default;
+    if(placeholders) props.placeholder = placeholders;
+    if(validation) props.validation = validation.join('|');
+    if(param.description) props.help = param.description;
+
+    return {
+        $cmp: 'FormKit',
+        props
+    };
+}
 
 export function readParameter(param: Parameter): FormKitItem | undefined {
     const schema = param.schema;
+    if(schema.enum) return readEnum(param);
     switch (schema!.type) {
         case 'number':
         case 'integer':
@@ -16,6 +44,7 @@ export function readParameter(param: Parameter): FormKitItem | undefined {
             return readObject(param);
         default:
             console.warn(`'${schema.type}' is not yet implemented`);
+            console.log(JSON.stringify(param));
             break;
     }
 }
