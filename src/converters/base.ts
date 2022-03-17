@@ -13,7 +13,7 @@ export namespace BaseType {
     }
 
     export function setValidation(param: Parameter, props: InputProps, validationData = [] as any[]) {
-        const required = param.required ? true : undefined;
+        const required = param.required ? 'required' : undefined;
         validationData.push(required);
         const validation = validationData.filter(a => a).map(a => [a]);
         if(validation.length > 0)

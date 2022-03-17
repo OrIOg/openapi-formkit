@@ -7,7 +7,7 @@ export function convertEnum(param: Parameter, options: Options): FormKitItem {
     let props = {
         type: 'select',
         name: param.name,
-        label: schema.title,
+        label: schema.title || param.name,
         options: param.schema.enum
     } as InputProps
 

@@ -21,7 +21,7 @@ export function convertNumber(param: Parameter, options: Options): FormKitInput 
     let props = {
         type: min && max? 'range' : 'number',
         name: param.name,
-        label: schema.title,
+        label: schema.title || param.name,
         step: isInt ? 1 : options.step
     } as InputProps
 

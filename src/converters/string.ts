@@ -37,7 +37,7 @@ export function convertString(param: Parameter, options: Options): FormKitInput 
     let props = {
         type,
         name: param.name,
-        label: schema.title
+        label: schema.title || param.name
     } as InputProps
 
     BaseType.setOptionals(param, props);
