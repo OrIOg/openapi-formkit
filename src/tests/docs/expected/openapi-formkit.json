@@ -6,11 +6,19 @@
       "children": [
         {
           "$cmp": "FormKit",
-          "props": { "type": "file", "name": "file", "label": "File" }
+          "props": {
+            "type": "file",
+            "name": "file",
+            "label": "File",
+            "validation": [["required"]]
+          }
         },
         {
           "$formkit": "group",
           "name": "parameters",
+          "props": {
+            "validation": [["required"]]
+          },
           "children": [
             {
               "$cmp": "FormKit",

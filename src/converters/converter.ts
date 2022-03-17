@@ -1,6 +1,6 @@
 import { ParameterObject, PathItemObject, RequestBodyObject, SchemaObject, OpenAPIObject } from 'openapi3-ts';
 import { convertBoolean, convertNumber, convertString } from '.';
-import { FormKitGroup, FormKitItem, Parameter, FormKitInput, Options, method, Route } from '../types';
+import { FormKitGroup, FormKitItem, Parameter, FormKitInput, Options, method, Route, UniversalProps } from '../types';
 import { convertEnum } from './enum';
 
 export default class Converter {
@@ -78,7 +78,8 @@ export default class Converter {
         return { 
             '$formkit': 'group', 
             name: param.name,
-            children: convertedParams
+            children: convertedParams,
+            props: {} as UniversalProps
         }
     }
 
@@ -102,11 +103,11 @@ export default class Converter {
                 const name = propertyName
                 const converted = this.readParameter({schema: property, name}) as FormKitInput;
                 if(converted) { 
-                    if (schema.required && propertyName in schema.required)
-                        if (converted!.props.validation)
-                            converted!.props.validation += '|required'
+                    if (schema.required && schema.required.includes(propertyName))
+                        if ('validation' in converted!.props)
+                            converted!.props.validation!.push(['required'])
                         else
-                            converted!.props.validation = 'required'
+                            converted!.props.validation = [['required']]
                     convertedParams.push(converted)
                 };
             }

@@ -20,9 +20,12 @@ export interface FormKitGroup {
     $formkit: 'group',
     name: String,
     children: Array<FormKitItem>
+    props: UniversalProps
 }
 
 export interface InputProps extends UniversalProps {
+    name: String
+    type: String
     placeholder?: String
     help?: String
     min?: Number
@@ -32,8 +35,6 @@ export interface InputProps extends UniversalProps {
 
 
 export interface UniversalProps {
-    name: String
-    type: String
     config?: Object
     delay?: Number
     errors?: Array<String>
@@ -42,7 +43,7 @@ export interface UniversalProps {
     parent?: any,
     preserve?: Boolean
     sectionsSchema?: Object
-    validation?: String | Array<Array<any>>
+    validation?: Array<Array<any>>
     validationVisibility?: 'blur' | 'dirty' | 'live'
     validationLabel?: string,
     validationRules?: Object
