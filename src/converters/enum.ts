@@ -1,12 +1,14 @@
-import { InputProps, Parameter, FormKitInput, Options } from "../types";
+import { FormKitItem, InputProps, Options, Parameter } from "../types";
 import { BaseType } from "./base";
 
-export function convertBoolean(param: Parameter, options: Options): FormKitInput {
+export function convertEnum(param: Parameter, options: Options): FormKitItem {
     const schema = param.schema;
+
     let props = {
-        type: 'checkbox',
+        type: 'select',
         name: param.name,
-        label: schema.title
+        label: schema.title,
+        options: param.schema.enum
     } as InputProps
 
     BaseType.setOptionals(param, props);

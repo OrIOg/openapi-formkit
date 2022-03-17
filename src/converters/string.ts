@@ -1,7 +1,7 @@
-import { FormKitInput, InputProps, Parameter } from './../types/index.d';
-import { getPlaceholderFromExamples } from "./util";
+import { FormKitInput, InputProps, Options, Parameter } from './../types/index.d';
+import { BaseType } from './base';
 
-export function convertString(param: Parameter): FormKitInput {
+export function convertString(param: Parameter, options: Options): FormKitInput {
     const schema = param.schema;
     let type = "text";
     if(schema.format) {
@@ -27,16 +27,12 @@ export function convertString(param: Parameter): FormKitInput {
         }
     }
 
-    const required = param.required ? true : undefined;
     const min = schema.minLength;
     const max = schema.maxLength;
 
-    const validation = []
-    if(required) validation.push("required")
-    if(min||max) validation.push(`length:${min||0},${max||''}`)
+    const validation = [];
+    if(min||max) validation.push(`length:${min||0},${max||''}`);
     if(["email", "url"].includes(type)) validation.push(type);
-
-    const placeholders = getPlaceholderFromExamples(param);
 
     let props = {
         type,
@@ -44,11 +40,8 @@ export function convertString(param: Parameter): FormKitInput {
         label: schema.title
     } as InputProps
 
-    if(schema.default) props.value = schema.default;
-    if(placeholders) props.placeholder = placeholders;
-    if(validation) props.validation = validation.join('|');
-    if(param.description) props.help = param.description
-
+    BaseType.setOptionals(param, props);
+    BaseType.setValidation(param, props, validation);
 
     return {
         $cmp: 'FormKit',

@@ -1,41 +1,34 @@
+import { Options } from './../types/index.d';
 import { InputProps, Parameter, FormKitInput } from "../types";
-import { getPlaceholderFromExamples } from "./util";
+import { BaseType } from "./base";
 
 export function isInteger(param: Parameter) {
     return param.schema.type == "integer"  
 }
 
-export function convertNumber(param: Parameter): FormKitInput {
+export function convertNumber(param: Parameter, options: Options): FormKitInput {
     const schema = param.schema;
-    const required = param.required ? true : undefined;
     const isInt = isInteger(param);
 
     let min = schema.minimum;
     if (min)
-        min = min + (schema.exclusiveMinimum ? (isInt ? 1 : Number.MIN_VALUE) : 0);
+        min = min + (schema.exclusiveMinimum ? (isInt ? 1 : options.step) : 0);
     
     let max = schema.maximum;
     if (max)
-        max = max + (schema.exclusiveMaximum ? (isInt ? 1 : Number.MIN_VALUE) : 0);
-
-    const validation = []
-    if(required) validation.push("required")
-
-    const placeholders = getPlaceholderFromExamples(param);
+        max = max + (schema.exclusiveMaximum ? (isInt ? 1 : options.step) : 0);
 
     let props = {
-        type: 'number',
+        type: min && max? 'range' : 'number',
         name: param.name,
-        label: schema.title
+        label: schema.title,
+        step: isInt ? 1 : options.step
     } as InputProps
 
-    if(schema.default) props.value = schema.default;
-    if(placeholders) props.placeholder = placeholders;
-    if(validation) props.validation = validation.join('|');
-    if(param.description) props.help = param.description;
     if(min) props.min = min;
     if(max) props.max = max;
-
+    BaseType.setOptionals(param, props);
+    BaseType.setValidation(param, props);
 
     return {
         $cmp: 'FormKit',

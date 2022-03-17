@@ -1,5 +1,9 @@
 import { BaseParameterObject, SchemaObject } from "openapi3-ts";
 
+export interface Options {
+    step: number
+}
+
 export interface Parameter extends BaseParameterObject {
     name: string
     schema: SchemaObject
@@ -23,6 +27,7 @@ export interface InputProps extends UniversalProps {
     help?: String
     min?: Number
     max?: Number
+    step?: Number
 }
 
 
@@ -37,7 +42,7 @@ export interface UniversalProps {
     parent?: any,
     preserve?: Boolean
     sectionsSchema?: Object
-    validation?: String | Array<String>
+    validation?: String | Array<Array<any>>
     validationVisibility?: 'blur' | 'dirty' | 'live'
     validationLabel?: string,
     validationRules?: Object
