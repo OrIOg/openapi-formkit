@@ -1,0 +1,54 @@
+{
+  "/number-examples": {
+    "get": {
+      "$cmp": "FormKit",
+      "props": { "type": "form", "method": "get" },
+      "children": [
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number",
+            "label": "number",
+            "step": 0.1,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-min",
+            "label": "number-min",
+            "step": 0.1,
+            "min": 17,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-max",
+            "label": "number-max",
+            "step": 0.1,
+            "max": 34,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "range",
+            "name": "number-minmax",
+            "label": "number-minmax",
+            "step": 0.1,
+            "min": 17,
+            "max": 34,
+            "validation": [["required"]]
+          }
+        }
+      ]
+    }
+  }
+}
