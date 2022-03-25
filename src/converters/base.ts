@@ -9,7 +9,7 @@ export namespace BaseType {
         const placeholders = getPlaceholderFromExamples(param);
         if(placeholders) data.placeholder = placeholders;
         
-        if(param.description) data.help = param.description;
+        if(schema.description) data.help = schema.description;
     }
 
     export function setValidation(param: Parameter, props: InputProps, validationData = [] as any[]) {
