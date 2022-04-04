@@ -5,67 +5,75 @@
       "props": { "type": "form", "method": "get" },
       "children": [
         {
-          "$cmp": "FormKit",
-          "props": {
-            "type": "text",
-            "name": "min",
-            "label": "min",
-            "validation": [["length:3,"], ["required"]]
-          }
-        },
-        {
-          "$cmp": "FormKit",
-          "props": {
-            "type": "text",
-            "name": "min-zero",
-            "label": "min-zero",
-            "validation": [["length:0,"], ["required"]]
-          }
-        },
-        {
-          "$cmp": "FormKit",
-          "props": {
-            "type": "text",
-            "name": "max",
-            "label": "max",
-            "validation": [["length:0,3"], ["required"]]
-          }
-        },
-        {
-          "$cmp": "FormKit",
-          "props": {
-            "type": "text",
-            "name": "minmax",
-            "label": "minmax",
-            "validation": [["length:3,14"], ["required"]]
-          }
-        },
-        {
-          "$cmp": "FormKit",
-          "props": {
-            "type": "email",
-            "name": "email",
-            "label": "email",
-            "validation": [["email"], ["required"]]
-          }
-        },
-        {
-          "$cmp": "FormKit",
-          "props": {
-            "type": "tel",
-            "name": "telephone",
-            "label": "telephone",
-            "validation": [["required"]]
-          }
-        },
-        {
-          "$cmp": "FormKit",
-          "props": {
-            "type": "url",
-            "name": "url",
-            "label": "url",
-            "validation": [["url"], ["required"]]
-          }
+          "$el": "div",
+          "attrs": {
+            "class": "formkit-inputs"
+          },
+          "children": [
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "text",
+                "name": "min",
+                "label": "min",
+                "validation": [["length:3,"], ["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "text",
+                "name": "min-zero",
+                "label": "min-zero",
+                "validation": [["length:0,"], ["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "text",
+                "name": "max",
+                "label": "max",
+                "validation": [["length:0,3"], ["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "text",
+                "name": "minmax",
+                "label": "minmax",
+                "validation": [["length:3,14"], ["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "email",
+                "name": "email",
+                "label": "email",
+                "validation": [["email"], ["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "tel",
+                "name": "telephone",
+                "label": "telephone",
+                "validation": [["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "url",
+                "name": "url",
+                "label": "url",
+                "validation": [["url"], ["required"]]
+              }
+            }
+          ]
         }
       ]
     }
