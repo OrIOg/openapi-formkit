@@ -28,7 +28,7 @@ export default class Converter {
                     parameters = this.readRequestBody(path[op]!.requestBody as RequestBodyObject);
                 }
 
-                if(parameters.length)
+                if(parameters.length) {
                     routes[op] = {
                         $cmp: "FormKit",
                         props: {
@@ -36,7 +36,13 @@ export default class Converter {
                             method: op
                         },
                         children: parameters
-                    };
+                    }
+                    if (this.options.inputsWrapper){
+                        this.options.inputsWrapper.children = routes[op].children;
+                        routes[op].children = [this.options.inputsWrapper]
+                    }
+                }
+                    
             }
 
             pathsParameters[route] = routes

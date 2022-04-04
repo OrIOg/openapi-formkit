@@ -5,7 +5,14 @@ import { OpenAPIObject } from 'openapi3-ts';
 
 export { Converter }
 
-export async function Convert(api: string, options: Options = { step: 0.1 }) {
+const defaultInputsWrapper = {
+    $el: 'div',
+    attrs: {
+        class: "formkit-inputs"
+    }
+}
+
+export async function Convert(api: string, options: Options = { step: 0.1, inputsWrapper: defaultInputsWrapper }) {
     let parser = new SwaggerParser()
     let obj = await parser.dereference(api) as OpenAPIObject;
 

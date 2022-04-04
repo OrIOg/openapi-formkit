@@ -1,7 +1,9 @@
 import { BaseParameterObject, SchemaObject } from "openapi3-ts";
+import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit } from "@formkit/core"
 
 export interface Options {
-    step: number
+    step: number,
+    inputsWrapper?: FormKitSchemaDOMNode
 }
 
 export interface Parameter extends BaseParameterObject {
@@ -9,14 +11,15 @@ export interface Parameter extends BaseParameterObject {
     schema: SchemaObject
 }
 
-export type FormKitItem = FormKitInput | FormKitGroup
+export type FormKitItem = FormKitInput | FormKitGroup | FormKitSchemaDOMNode | FormKitSchemaFormKit
 
-export interface FormKitInput {
+export interface FormKitInput extends FormKitSchemaComponent {
     $cmp: 'FormKit',
-    props: InputProps
+    props: InputProps,
+    children?: Array<FormKitItem>
 }
 
-export interface FormKitGroup {
+export interface FormKitGroup extends FormKitSchemaFormKit {
     $formkit: 'group',
     name: String,
     children: Array<FormKitItem>
@@ -60,3 +63,12 @@ export interface Route {
 }
 
 export type method = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options' | 'trace';
+
+
+
+//FIXME: Is there a better way ?
+declare module '@formkit/core' {
+    export interface Event {
+
+    }
+}

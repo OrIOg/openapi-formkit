@@ -5,81 +5,89 @@
       "props": { "type": "form", "method": "post" },
       "children": [
         {
-          "$cmp": "FormKit",
-          "props": {
-            "help": "Image to be cartoonised",
-            "type": "file",
-            "name": "file",
-            "label": "File",
-            "validation": [["required"]]
-          }
-        },
-        {
-          "$formkit": "group",
-          "name": "parameters",
-          "props": {
-            "validation": [["required"]]
+          "$el": "div",
+          "attrs": {
+            "class": "formkit-inputs"
           },
           "children": [
             {
               "$cmp": "FormKit",
               "props": {
-                "type": "number",
-                "name": "smoothness",
-                "label": "Smoothness",
-                "step": 1,
-                "value": 3
+                "help": "Image to be cartoonised",
+                "type": "file",
+                "name": "file",
+                "label": "File",
+                "validation": [["required"]]
               }
             },
             {
-              "$cmp": "FormKit",
+              "$formkit": "group",
+              "name": "parameters",
               "props": {
-                "type": "number",
-                "name": "sharpening",
-                "label": "Sharpening",
-                "step": 1,
-                "value": 150
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "threshold",
-                "label": "Threshold",
-                "step": 1,
-                "value": 20
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "thickness",
-                "label": "Thickness",
-                "step": 0.1,
-                "value": 0.25
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "color",
-                "label": "Color",
-                "step": 0.1,
-                "value": 1.5
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "quantization",
-                "label": "Quantization",
-                "step": 1,
-                "value": 8
-              }
+                "validation": [["required"]]
+              },
+              "children": [
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "smoothness",
+                    "label": "Smoothness",
+                    "step": 1,
+                    "value": 3
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "sharpening",
+                    "label": "Sharpening",
+                    "step": 1,
+                    "value": 150
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "threshold",
+                    "label": "Threshold",
+                    "step": 1,
+                    "value": 20
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "thickness",
+                    "label": "Thickness",
+                    "step": 0.1,
+                    "value": 0.25
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "color",
+                    "label": "Color",
+                    "step": 0.1,
+                    "value": 1.5
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "quantization",
+                    "label": "Quantization",
+                    "step": 1,
+                    "value": 8
+                  }
+                }
+              ]
             }
           ]
         }
