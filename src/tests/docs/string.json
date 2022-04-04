@@ -19,6 +19,15 @@
 					}
 				},{
 					"in": "query",
+					"name": "min-zero",
+					"required": true,
+					"schema" : {
+						"type": "string",
+						"minLength": 0
+					}
+				}
+				,{
+					"in": "query",
 					"name": "max",
 					"required": true,
 					"schema" : {
