@@ -1,6 +1,6 @@
 {
   "name": "openapi-formkit",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Transform an OpenAPI document to a VueFormulate JSON Form generation",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
