@@ -31,7 +31,7 @@ export function convertString(param: Parameter, options: Options): FormKitInput 
     const max = schema.maxLength;
 
     const validation = [];
-    if(min||max) validation.push(`length:${min||0},${max||''}`);
+    if(min!==undefined||max!==undefined) validation.push(`length:${min||0},${max||''}`);
     if(["email", "url"].includes(type)) validation.push(type);
 
     let props = {

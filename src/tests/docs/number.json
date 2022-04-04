@@ -20,6 +20,15 @@
             },
             {
               "in": "query",
+              "name": "number-min-zero",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            {
+              "in": "query",
               "name": "number-min",
               "required": true,
               "schema": {

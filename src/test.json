@@ -1,0 +1,257 @@
+{
+    "openapi": "3.0.2",
+    "info": { "title": "/gmic", "version": "1.0.0" },
+    "paths": {
+      "/api/demos/gmic/cartoon/": {
+        "post": {
+          "tags": ["GMIC"],
+          "summary": "Cartoon",
+          "operationId": "cartoon_api_demos_gmic_cartoon__post",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body_cartoon_api_demos_gmic_cartoon__post"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": { "description": "Successful Response" },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/demos/gmic/style_transfer": {
+        "post": {
+          "tags": ["GMIC"],
+          "summary": "Style Transfer",
+          "operationId": "style_transfer_api_demos_gmic_style_transfer_post",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body_style_transfer_api_demos_gmic_style_transfer_post"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": { "description": "Successful Response" },
+            "422": {
+              "description": "Validation Error",
+              "content": {
+                "application/json": {
+                  "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Body_cartoon_api_demos_gmic_cartoon__post": {
+          "title": "Body_cartoon_api_demos_gmic_cartoon__post",
+          "required": ["file", "parameters"],
+          "type": "object",
+          "properties": {
+            "file": {
+              "title": "File",
+              "type": "string",
+              "description": "Image to be cartoonised",
+              "format": "binary"
+            },
+            "parameters": {
+              "$ref": "#/components/schemas/demos__apps__gmic__transformations__cartoon__Cartoon__Parameters"
+            }
+          }
+        },
+        "Body_style_transfer_api_demos_gmic_style_transfer_post": {
+          "title": "Body_style_transfer_api_demos_gmic_style_transfer_post",
+          "required": ["file", "parameters"],
+          "type": "object",
+          "properties": {
+            "file": {
+              "title": "File",
+              "type": "string",
+              "description": "Image to be stylized",
+              "format": "binary"
+            },
+            "parameters": {
+              "$ref": "#/components/schemas/demos__apps__gmic__transformations__style_transfer__StyleTransfer__Parameters"
+            }
+          }
+        },
+        "HTTPValidationError": {
+          "title": "HTTPValidationError",
+          "type": "object",
+          "properties": {
+            "detail": {
+              "title": "Detail",
+              "type": "array",
+              "items": { "$ref": "#/components/schemas/ValidationError" }
+            }
+          }
+        },
+        "ValidationError": {
+          "title": "ValidationError",
+          "required": ["loc", "msg", "type"],
+          "type": "object",
+          "properties": {
+            "loc": {
+              "title": "Location",
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "msg": { "title": "Message", "type": "string" },
+            "type": { "title": "Error Type", "type": "string" }
+          }
+        },
+        "demos__apps__gmic__transformations__cartoon__Cartoon__Parameters": {
+          "title": "Parameters",
+          "type": "object",
+          "properties": {
+            "smoothness": {
+              "title": "Smoothness",
+              "maximum": 10.0,
+              "minimum": 0.0,
+              "type": "number",
+              "default": 3
+            },
+            "sharpening": {
+              "title": "Sharpening",
+              "type": "number",
+              "default": 150
+            },
+            "threshold": {
+              "title": "Threshold",
+              "minimum": 0.0,
+              "type": "number",
+              "default": 20
+            },
+            "thickness": {
+              "title": "Thickness",
+              "minimum": 0.0,
+              "type": "number",
+              "default": 0.25
+            },
+            "color": {
+              "title": "Color",
+              "minimum": 0.0,
+              "type": "number",
+              "default": 1.5
+            },
+            "quantization": {
+              "title": "Quantization",
+              "exclusiveMinimum": 0.0,
+              "type": "number",
+              "default": 8
+            }
+          }
+        },
+        "demos__apps__gmic__transformations__style_transfer__StyleTransfer__Parameters": {
+          "title": "Parameters",
+          "type": "object",
+          "properties": {
+            "fidelity_finest": {
+              "title": "Fidelity Finest",
+              "type": "number",
+              "default": 0.5
+            },
+            "fidelity_coarsest": {
+              "title": "Fidelity Coarsest",
+              "type": "integer",
+              "default": 2
+            },
+            "fidelity_smoothness_finest": {
+              "title": "Fidelity Smoothness Finest",
+              "type": "integer",
+              "default": 3
+            },
+            "fidelity_smoothness_coarsest": {
+              "title": "Fidelity Smoothness Coarsest",
+              "type": "number",
+              "default": 0.5
+            },
+            "fidelity_chroma": {
+              "title": "Fidelity Chroma",
+              "type": "number",
+              "default": 0.1
+            },
+            "init_type": {
+              "title": "Init Type",
+              "type": "integer",
+              "default": 0
+            },
+            "init_resolution": {
+              "title": "Init Resolution",
+              "type": "integer",
+              "default": 16
+            },
+            "init_max_gradient": {
+              "title": "Init Max Gradient",
+              "type": "integer",
+              "default": 0
+            },
+            "patchsize_analysis": {
+              "title": "Patchsize Analysis",
+              "type": "integer",
+              "default": 5
+            },
+            "patchsize_synthesis": {
+              "title": "Patchsize Synthesis",
+              "type": "integer",
+              "default": 5
+            },
+            "patchsize_synthesis_final": {
+              "title": "Patchsize Synthesis Final",
+              "type": "integer",
+              "default": 5
+            },
+            "nb_matches_finest": {
+              "title": "Nb Matches Finest",
+              "type": "integer",
+              "default": 2
+            },
+            "nb_matchesc_coarsest": {
+              "title": "Nb Matchesc Coarsest",
+              "type": "integer",
+              "default": 30
+            },
+            "penalize_repetitions": {
+              "title": "Penalize Repetitions",
+              "type": "integer",
+              "default": 2
+            },
+            "matching_precision": {
+              "title": "Matching Precision",
+              "type": "integer",
+              "default": 2
+            },
+            "scale_factor": {
+              "title": "Scale Factor",
+              "type": "number",
+              "default": 1.85
+            },
+            "skip_finest_scales": {
+              "title": "Skip Finest Scales",
+              "type": "integer",
+              "default": 1
+            }
+          }
+        }
+      }
+    }
+  }
+  

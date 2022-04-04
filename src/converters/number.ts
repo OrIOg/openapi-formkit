@@ -11,11 +11,11 @@ export function convertNumber(param: Parameter, options: Options): FormKitInput 
     const isInt = isInteger(param);
 
     let min = schema.minimum;
-    if (min)
+    if (min !== undefined)
         min = min + (schema.exclusiveMinimum ? (isInt ? 1 : options.step) : 0);
     
     let max = schema.maximum;
-    if (max)
+    if (max !== undefined)
         max = max + (schema.exclusiveMaximum ? (isInt ? 1 : options.step) : 0);
 
     let props = {
@@ -25,8 +25,8 @@ export function convertNumber(param: Parameter, options: Options): FormKitInput 
         step: isInt ? 1 : options.step
     } as InputProps
 
-    if(min) props.min = min;
-    if(max) props.max = max;
+    if(min !== undefined) props.min = min;
+    if(max !== undefined) props.max = max;
     BaseType.setOptionals(param, props);
     BaseType.setValidation(param, props);
 
