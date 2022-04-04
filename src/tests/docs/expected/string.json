@@ -17,6 +17,15 @@
           "$cmp": "FormKit",
           "props": {
             "type": "text",
+            "name": "min-zero",
+            "label": "min-zero",
+            "validation": [["length:0,"], ["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "text",
             "name": "max",
             "label": "max",
             "validation": [["length:0,3"], ["required"]]

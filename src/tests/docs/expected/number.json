@@ -18,6 +18,17 @@
           "$cmp": "FormKit",
           "props": {
             "type": "number",
+            "name": "number-min-zero",
+            "label": "number-min-zero",
+            "step": 0.1,
+            "min": 0,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
             "name": "number-min",
             "label": "number-min",
             "step": 0.1,
