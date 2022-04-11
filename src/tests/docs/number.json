@@ -54,6 +54,24 @@
                 "minimum": 17,
                 "maximum": 34
               }
+            },
+            {
+              "in": "query",
+              "name": "number-default-zero",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "default": 0
+              }
+            },
+            {
+              "in": "query",
+              "name": "number-default",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "default": 17
+              }
             }
           ],
           "responses": {

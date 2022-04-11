@@ -2,6 +2,7 @@ import { ParameterObject, PathItemObject, RequestBodyObject, SchemaObject, OpenA
 import { convertBoolean, convertNumber, convertString } from '.';
 import { FormKitGroup, FormKitItem, Parameter, FormKitInput, Options, method, Route, UniversalProps } from '../types';
 import { convertEnum } from './enum';
+import deepcopy from 'deepcopy';
 
 export default class Converter {
     protected options: Options;
@@ -37,9 +38,10 @@ export default class Converter {
                         },
                         children: parameters
                     }
-                    if (this.options.inputsWrapper){
-                        this.options.inputsWrapper.children = routes[op].children;
-                        routes[op].children = [this.options.inputsWrapper]
+                    if (this.options.inputsWrapper) {
+                        const wrapper = deepcopy(this.options.inputsWrapper);
+                        wrapper.children = parameters;
+                        routes[op].children = [wrapper]
                     }
                 }
                     

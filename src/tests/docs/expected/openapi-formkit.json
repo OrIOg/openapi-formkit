@@ -1,39 +1,36 @@
 {
-  "/cartoon/": {
+  "/api/demos/gmic/cartoon/": {
     "post": {
       "$cmp": "FormKit",
       "props": { "type": "form", "method": "post" },
       "children": [
         {
           "$el": "div",
-          "attrs": {
-            "class": "formkit-inputs"
-          },
+          "attrs": { "class": "formkit-inputs" },
           "children": [
             {
               "$cmp": "FormKit",
               "props": {
-                "help": "Image to be cartoonised",
                 "type": "file",
                 "name": "file",
                 "label": "File",
+                "help": "Image to be cartoonised",
                 "validation": [["required"]]
               }
             },
             {
               "$formkit": "group",
               "name": "parameters",
-              "props": {
-                "validation": [["required"]]
-              },
               "children": [
                 {
                   "$cmp": "FormKit",
                   "props": {
-                    "type": "number",
+                    "type": "range",
                     "name": "smoothness",
                     "label": "Smoothness",
-                    "step": 1,
+                    "step": 0.1,
+                    "min": 0,
+                    "max": 10,
                     "value": 3
                   }
                 },
@@ -43,7 +40,7 @@
                     "type": "number",
                     "name": "sharpening",
                     "label": "Sharpening",
-                    "step": 1,
+                    "step": 0.1,
                     "value": 150
                   }
                 },
@@ -53,7 +50,8 @@
                     "type": "number",
                     "name": "threshold",
                     "label": "Threshold",
-                    "step": 1,
+                    "step": 0.1,
+                    "min": 0,
                     "value": 20
                   }
                 },
@@ -64,6 +62,7 @@
                     "name": "thickness",
                     "label": "Thickness",
                     "step": 0.1,
+                    "min": 0,
                     "value": 0.25
                   }
                 },
@@ -74,6 +73,7 @@
                     "name": "color",
                     "label": "Color",
                     "step": 0.1,
+                    "min": 0,
                     "value": 1.5
                   }
                 },
@@ -83,11 +83,213 @@
                     "type": "number",
                     "name": "quantization",
                     "label": "Quantization",
-                    "step": 1,
+                    "step": 0.1,
                     "value": 8
                   }
                 }
-              ]
+              ],
+              "props": { "validation": [["required"]] }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "/api/demos/gmic/style_transfer": {
+    "post": {
+      "$cmp": "FormKit",
+      "props": { "type": "form", "method": "post" },
+      "children": [
+        {
+          "$el": "div",
+          "attrs": { "class": "formkit-inputs" },
+          "children": [
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "file",
+                "name": "file",
+                "label": "File",
+                "help": "Image to be stylized",
+                "validation": [["required"]]
+              }
+            },
+            {
+              "$formkit": "group",
+              "name": "parameters",
+              "children": [
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "fidelity_finest",
+                    "label": "Fidelity Finest",
+                    "step": 0.1,
+                    "value": 0.5
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "fidelity_coarsest",
+                    "label": "Fidelity Coarsest",
+                    "step": 1,
+                    "value": 2
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "fidelity_smoothness_finest",
+                    "label": "Fidelity Smoothness Finest",
+                    "step": 1,
+                    "value": 3
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "fidelity_smoothness_coarsest",
+                    "label": "Fidelity Smoothness Coarsest",
+                    "step": 0.1,
+                    "value": 0.5
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "fidelity_chroma",
+                    "label": "Fidelity Chroma",
+                    "step": 0.1,
+                    "value": 0.1
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "init_type",
+                    "label": "Init Type",
+                    "step": 1,
+                    "value": 0
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "init_resolution",
+                    "label": "Init Resolution",
+                    "step": 1,
+                    "value": 16
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "init_max_gradient",
+                    "label": "Init Max Gradient",
+                    "step": 1,
+                    "value": 0
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "patchsize_analysis",
+                    "label": "Patchsize Analysis",
+                    "step": 1,
+                    "value": 5
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "patchsize_synthesis",
+                    "label": "Patchsize Synthesis",
+                    "step": 1,
+                    "value": 5
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "patchsize_synthesis_final",
+                    "label": "Patchsize Synthesis Final",
+                    "step": 1,
+                    "value": 5
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "nb_matches_finest",
+                    "label": "Nb Matches Finest",
+                    "step": 1,
+                    "value": 2
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "nb_matchesc_coarsest",
+                    "label": "Nb Matchesc Coarsest",
+                    "step": 1,
+                    "value": 30
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "penalize_repetitions",
+                    "label": "Penalize Repetitions",
+                    "step": 1,
+                    "value": 2
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "matching_precision",
+                    "label": "Matching Precision",
+                    "step": 1,
+                    "value": 2
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "scale_factor",
+                    "label": "Scale Factor",
+                    "step": 0.1,
+                    "value": 1.85
+                  }
+                },
+                {
+                  "$cmp": "FormKit",
+                  "props": {
+                    "type": "number",
+                    "name": "skip_finest_scales",
+                    "label": "Skip Finest Scales",
+                    "step": 1,
+                    "value": 1
+                  }
+                }
+              ],
+              "props": { "validation": [["required"]] }
             }
           ]
         }

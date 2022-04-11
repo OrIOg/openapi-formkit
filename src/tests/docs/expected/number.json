@@ -64,6 +64,28 @@
                 "max": 34,
                 "validation": [["required"]]
               }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "number",
+                "name": "number-default-zero",
+                "label": "number-default-zero",
+                "step": 0.1,
+                "value": 0,
+                "validation": [["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "number",
+                "name": "number-default",
+                "label": "number-default",
+                "step": 0.1,
+                "value": 17,
+                "validation": [["required"]]
+              }
             }
           ]
         }
