@@ -1,5 +1,5 @@
 import { BaseParameterObject, DiscriminatorObject, ExternalDocumentationObject, ISpecificationExtension, ReferenceObject, SchemaObject as schema, XmlObject } from "openapi3-ts";
-import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit, FormKitSchemaProps } from "@formkit/core"
+import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit } from "@formkit/core"
 
 export interface Options {
     step: number,
