@@ -17,15 +17,14 @@
   "devDependencies": {
     "@formkit/core": "^1.0.0-beta.6",
     "@types/jest": "^27.4.1",
-    "jest": "^27.5.1",
-    "ts-jest": "^27.1.3",
+    "ts-jest": "^28.0.5",
     "ts-node": "^10.7.0",
-    "ts-node-dev": "^1.1.8",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^4.6.2"
   },
   "dependencies": {
     "deepcopy": "^2.1.0",
-    "openapi-types": "^10.0.0",
+    "openapi-types": "^12.0.0",
     "openapi3-ts": "^2.0.2",
     "swagger-parser": "^10.0.3"
   }
