@@ -12,9 +12,9 @@ const defaultInputsWrapper = {
     }
 }
 
-export async function Convert(api: string, options: Options = { step: 0.1, inputsWrapper: defaultInputsWrapper }) {
+export async function Convert(src: string, options: Options = { step: 0.1, inputsWrapper: defaultInputsWrapper }) {
     let parser = new SwaggerParser()
-    let obj = await parser.dereference(api) as OpenAPIObject;
+    let obj = await parser.dereference(src) as OpenAPIObject;
 
     const converter = new Converter(options);
     return converter.convert(obj);

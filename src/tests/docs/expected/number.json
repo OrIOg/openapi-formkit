@@ -86,6 +86,72 @@
                 "value": 17,
                 "validation": [["required"]]
               }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "number",
+                "name": "number-exclusive-min-neg",
+                "min": -33.9,
+                "label": "number-exclusive-min-neg",
+                "step": 0.1,
+                "validation": [["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "number",
+                "name": "number-exclusive-min-zero",
+                "min": 0.1,
+                "label": "number-exclusive-min-zero",
+                "step": 0.1,
+                "validation": [["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "number",
+                "name": "number-exclusive-min-pos",
+                "min": 34.1,
+                "label": "number-exclusive-min-pos",
+                "step": 0.1,
+                "validation": [["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "number",
+                "name": "number-exclusive-max-neg",
+                "max": -34.1,
+                "label": "number-exclusive-max-neg",
+                "step": 0.1,
+                "validation": [["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "number",
+                "name": "number-exclusive-max-zero",
+                "max": -0.1,
+                "label": "number-exclusive-max-zero",
+                "step": 0.1,
+                "validation": [["required"]]
+              }
+            },
+            {
+              "$cmp": "FormKit",
+              "props": {
+                "type": "number",
+                "name": "number-exclusive-max-pos",
+                "max": 33.9,
+                "label": "number-exclusive-max-pos",
+                "step": 0.1,
+                "validation": [["required"]]
+              }
             }
           ]
         }

@@ -1,4 +1,4 @@
-import { BaseParameterObject, SchemaObject } from "openapi3-ts";
+import { BaseParameterObject, SchemaObject as schema } from "openapi3-ts";
 import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit } from "@formkit/core"
 
 export interface Options {
@@ -6,7 +6,13 @@ export interface Options {
     inputsWrapper?: FormKitSchemaDOMNode
 }
 
-export interface Parameter extends BaseParameterObject {
+
+export interface SchemaObject extends Omit<schema, 'exclusiveMinimum'|'exclusiveMaximum'> & schema  {
+    exclusiveMinimum: number
+    exclusiveMaximum: number
+}
+
+export interface Parameter extends Omit<BaseParameterObject, 'schema'> {
     name: string
     schema: SchemaObject
 }

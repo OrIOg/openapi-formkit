@@ -1,6 +1,6 @@
-import { ParameterObject, PathItemObject, RequestBodyObject, SchemaObject, OpenAPIObject } from 'openapi3-ts';
+import { ParameterObject, PathItemObject, RequestBodyObject, OpenAPIObject } from 'openapi3-ts';
 import { convertBoolean, convertNumber, convertString } from '.';
-import { FormKitGroup, FormKitItem, Parameter, FormKitInput, Options, method, Route, UniversalProps } from '../types';
+import { FormKitGroup, FormKitItem, Parameter, FormKitInput, Options, method, Route, UniversalProps,SchemaObject } from '../types';
 import { convertEnum } from './enum';
 import deepcopy from 'deepcopy';
 

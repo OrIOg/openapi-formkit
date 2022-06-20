@@ -72,6 +72,54 @@
                 "type": "number",
                 "default": 17
               }
+            },
+            {  "in": "query",
+              "name": "number-exclusive-min-neg",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "exclusiveMinimum": -34
+              }
+            },
+            {  "in": "query",
+              "name": "number-exclusive-min-zero",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            {  "in": "query",
+              "name": "number-exclusive-min-pos",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "exclusiveMinimum": 34
+              }
+            },
+            {  "in": "query",
+              "name": "number-exclusive-max-neg",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "exclusiveMaximum": -34
+              }
+            },
+            {  "in": "query",
+              "name": "number-exclusive-max-zero",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "exclusiveMaximum": 0
+              }
+            },
+            {  "in": "query",
+              "name": "number-exclusive-max-pos",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "exclusiveMaximum": 34
+              }
             }
           ],
           "responses": {

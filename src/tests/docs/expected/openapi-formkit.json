@@ -82,6 +82,7 @@
                   "props": {
                     "type": "number",
                     "name": "quantization",
+                    "min": 0.1,
                     "label": "Quantization",
                     "step": 0.1,
                     "value": 8

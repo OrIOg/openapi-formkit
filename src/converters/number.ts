@@ -8,15 +8,22 @@ export function isInteger(param: Parameter) {
 
 export function convertNumber(param: Parameter, options: Options): FormKitInput {
     const schema = param.schema;
+    
     const isInt = isInteger(param);
 
-    let min = schema.minimum;
-    if (min !== undefined)
-        min = min + (schema.exclusiveMinimum ? (isInt ? 1 : options.step) : 0);
+    if (schema.minimum !== undefined && schema.exclusiveMinimum !== undefined)
+        throw `${param.name}: 'minimum' and 'exclusiveMinimum' shouldn't be set at the same time.`
     
-    let max = schema.maximum;
+    if (schema.maximum !== undefined && schema.exclusiveMaximum !== undefined)
+        throw `${param.name}: 'maximum' and 'exclusiveMaximum' shouldn't be set at the same time.`
+
+    let min = schema.exclusiveMinimum ?? schema.minimum;
+    if (min !== undefined)
+        min = min + (schema.exclusiveMinimum !== undefined ? (isInt ? 1 : options.step) : 0);
+    
+    let max = schema.exclusiveMaximum ?? schema.maximum;
     if (max !== undefined)
-        max = max + (schema.exclusiveMaximum ? (isInt ? 1 : options.step) : 0);
+        max = max - (schema.exclusiveMaximum !== undefined ? (isInt ? 1 : options.step) : 0);
 
     let props = {
         type: min!== undefined && max !== undefined ? 'range' : 'number',
