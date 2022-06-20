@@ -1,4 +1,4 @@
-import { BaseParameterObject, SchemaObject as schema } from "openapi3-ts";
+import { BaseParameterObject, DiscriminatorObject, ExternalDocumentationObject, ISpecificationExtension, ReferenceObject, SchemaObject as schema, XmlObject } from "openapi3-ts";
 import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit } from "@formkit/core"
 
 export interface Options {
@@ -6,10 +6,47 @@ export interface Options {
     inputsWrapper?: FormKitSchemaDOMNode
 }
 
+type TempOmitSchema = Omit<schema, 'exclusiveMinimum'|'exclusiveMaximum'>;
 
-export interface SchemaObject extends Omit<schema, 'exclusiveMinimum'|'exclusiveMaximum'> & schema  {
-    exclusiveMinimum: number
-    exclusiveMaximum: number
+export interface SchemaObject extends ISpecificationExtension {
+    nullable?: boolean;
+    discriminator?: DiscriminatorObject;
+    readOnly?: boolean;
+    writeOnly?: boolean;
+    xml?: XmlObject;
+    externalDocs?: ExternalDocumentationObject;
+    example?: any;
+    examples?: any[];
+    deprecated?: boolean;
+    type?: 'integer' | 'number' | 'string' | 'boolean' | 'object' | 'null' | 'array';
+    format?: 'int32' | 'int64' | 'float' | 'double' | 'byte' | 'binary' | 'date' | 'date-time' | 'password' | string;
+    allOf?: (SchemaObject | ReferenceObject)[];
+    oneOf?: (SchemaObject | ReferenceObject)[];
+    anyOf?: (SchemaObject | ReferenceObject)[];
+    not?: SchemaObject | ReferenceObject;
+    items?: SchemaObject | ReferenceObject;
+    properties?: {
+        [propertyName: string]: SchemaObject | ReferenceObject;
+    };
+    additionalProperties?: SchemaObject | ReferenceObject | boolean;
+    description?: string;
+    default?: any;
+    title?: string;
+    multipleOf?: number;
+    maximum?: number;
+    exclusiveMaximum?: number;
+    minimum?: number;
+    exclusiveMinimum?: number;
+    maxLength?: number;
+    minLength?: number;
+    pattern?: string;
+    maxItems?: number;
+    minItems?: number;
+    uniqueItems?: boolean;
+    maxProperties?: number;
+    minProperties?: number;
+    required?: string[];
+    enum?: any[];
 }
 
 export interface Parameter extends Omit<BaseParameterObject, 'schema'> {
