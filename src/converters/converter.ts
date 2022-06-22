@@ -69,19 +69,28 @@ export default class Converter {
         }
     }
 
-    public readObject(param: Parameter): FormKitGroup {
-        let convertedParams = [];
-        let schema = (param.schema as SchemaObject);
+    public readObject(parameter: Parameter): FormKitGroup {
+        const convertedParams = [];
+        const schema = (parameter.schema as SchemaObject);
+        const required = new Set(parameter.schema.required ?? []);
         for (const propertyName in schema.properties) {
             const property = schema.properties[propertyName] as SchemaObject;
             const name = propertyName
             const converted = this.readParameter({schema: property, name});
-            if(converted) convertedParams.push(converted);
+            if(converted) {
+                if (required.has(propertyName))
+                    if ('validation' in converted!.props)
+                        converted!.props.validation!.push(['required'])
+                    else
+                        converted!.props.validation = [['required']]
+                this.applyTransformers(parameter, converted);
+                convertedParams.push(converted);
+            }
         }
         
         return { 
             '$formkit': 'group', 
-            name: param.name,
+            name: parameter.name,
             children: convertedParams,
             props: {} as UniversalProps
         }
@@ -111,13 +120,14 @@ export default class Converter {
         for (const mediaType in body.content) {
             const media = body.content[mediaType];
             let schema = (media.schema as SchemaObject);
+            const required = new Set(schema.required ?? []);
             for (const propertyName in schema.properties) {
                 const property = schema.properties[propertyName] as SchemaObject;
                 const name = propertyName
                 const parameter = {schema: property, name} as Parameter
                 const converted = this.readParameter(parameter) as FormKitInput;
                 if(converted) { 
-                    if (schema.required && schema.required.includes(propertyName))
+                    if (required.has(propertyName))
                         if ('validation' in converted!.props)
                             converted!.props.validation!.push(['required'])
                         else

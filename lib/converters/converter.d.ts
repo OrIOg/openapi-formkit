@@ -5,7 +5,7 @@ export default class Converter {
     constructor(options: Options);
     convert(obj: OpenAPIObject): Record<string, Record<method, Route>>;
     readParameter(param: Parameter): FormKitItem | undefined;
-    readObject(param: Parameter): FormKitGroup;
+    readObject(parameter: Parameter): FormKitGroup;
     applyTransformers(parameter: Parameter, item: FormKitItem): void;
     readParameters(parameters: ParameterObject[]): FormKitItem[];
     readRequestBody(body: RequestBodyObject): FormKitItem[];
