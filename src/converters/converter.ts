@@ -2,7 +2,6 @@ import { ParameterObject, PathItemObject, RequestBodyObject, OpenAPIObject } fro
 import { convertBoolean, convertNumber, convertString } from '.';
 import { FormKitGroup, FormKitItem, Parameter, FormKitInput, Options, method, Route, UniversalProps,SchemaObject } from '../types';
 import { convertEnum } from './enum';
-import deepcopy from 'deepcopy';
 
 export default class Converter {
     protected options: Options;
