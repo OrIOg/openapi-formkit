@@ -38,11 +38,7 @@ export default class Converter {
                         },
                         children: parameters
                     }
-                    if (this.options.inputsWrapper) {
-                        const wrapper = deepcopy(this.options.inputsWrapper);
-                        wrapper.children = parameters;
-                        routes[op].children = [wrapper]
-                    }
+                    
                 }
                     
             }
@@ -91,12 +87,21 @@ export default class Converter {
         }
     }
 
+    public applyTransformers(parameter: Parameter, item: FormKitItem) {
+        this.options.transformers.forEach(transformer => {
+            transformer(parameter, this.options, item)
+        })
+    }
+
     public readParameters(parameters: ParameterObject[]): FormKitItem[] {
         let convertedParams = [] as FormKitItem[];
-        for(let param of parameters) {
-            if(!param.schema) continue
-            const converted = this.readParameter(param as Parameter);
-            if(converted) convertedParams.push(converted);
+        for(let parameter of parameters) {
+            if(!parameter.schema) continue
+            const converted = this.readParameter(parameter as Parameter);
+            if(converted) { 
+                this.applyTransformers(parameter as Parameter, converted)
+                convertedParams.push(converted);
+            }
         }
         return convertedParams
     }
@@ -109,13 +114,15 @@ export default class Converter {
             for (const propertyName in schema.properties) {
                 const property = schema.properties[propertyName] as SchemaObject;
                 const name = propertyName
-                const converted = this.readParameter({schema: property, name}) as FormKitInput;
+                const parameter = {schema: property, name} as Parameter
+                const converted = this.readParameter(parameter) as FormKitInput;
                 if(converted) { 
                     if (schema.required && schema.required.includes(propertyName))
                         if ('validation' in converted!.props)
                             converted!.props.validation!.push(['required'])
                         else
                             converted!.props.validation = [['required']]
+                    this.applyTransformers(parameter, converted)
                     convertedParams.push(converted)
                 };
             }

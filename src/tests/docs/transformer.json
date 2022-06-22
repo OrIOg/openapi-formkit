@@ -1,0 +1,55 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Simple API overview",
+    "version": "1.0"
+  },
+  "paths": {
+    "/transformers-examples": {
+      "get": {
+        "operationId": "listExamples",
+        "summary": "List demo examples",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "number-minmax",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "minimum": 17,
+              "maximum": 34
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Example": {
+        "description": "Example obj",
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["name", "description"]
+      }
+    }
+  }
+}

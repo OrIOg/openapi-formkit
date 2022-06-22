@@ -1,0 +1,23 @@
+{
+    "/transformers-examples": {
+      "get": {
+        "$cmp": "FormKit",
+        "props": { "type": "form", "method": "get" },
+        "children": [
+          {
+            "$cmp": "FormKit",
+            "props": {
+              "type": "range",
+              "name": "number-minmax",
+              "label": "number-minmax",
+              "step": 0.1,
+              "min": 17,
+              "max": 34,
+              "validation": [["(200)required"]]
+            }
+          }
+        ]
+      }
+    }
+  }
+  

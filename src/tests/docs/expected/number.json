@@ -5,155 +5,147 @@
       "props": { "type": "form", "method": "get" },
       "children": [
         {
-          "$el": "div",
-          "attrs": {
-            "class": "formkit-inputs"
-          },
-          "children": [
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number",
-                "label": "number",
-                "step": 0.1,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-min-zero",
-                "label": "number-min-zero",
-                "step": 0.1,
-                "min": 0,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-min",
-                "label": "number-min",
-                "step": 0.1,
-                "min": 17,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-max",
-                "label": "number-max",
-                "step": 0.1,
-                "max": 34,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "range",
-                "name": "number-minmax",
-                "label": "number-minmax",
-                "step": 0.1,
-                "min": 17,
-                "max": 34,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-default-zero",
-                "label": "number-default-zero",
-                "step": 0.1,
-                "value": 0,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-default",
-                "label": "number-default",
-                "step": 0.1,
-                "value": 17,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-exclusive-min-neg",
-                "min": -33.9,
-                "label": "number-exclusive-min-neg",
-                "step": 0.1,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-exclusive-min-zero",
-                "min": 0.1,
-                "label": "number-exclusive-min-zero",
-                "step": 0.1,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-exclusive-min-pos",
-                "min": 34.1,
-                "label": "number-exclusive-min-pos",
-                "step": 0.1,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-exclusive-max-neg",
-                "max": -34.1,
-                "label": "number-exclusive-max-neg",
-                "step": 0.1,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-exclusive-max-zero",
-                "max": -0.1,
-                "label": "number-exclusive-max-zero",
-                "step": 0.1,
-                "validation": [["required"]]
-              }
-            },
-            {
-              "$cmp": "FormKit",
-              "props": {
-                "type": "number",
-                "name": "number-exclusive-max-pos",
-                "max": 33.9,
-                "label": "number-exclusive-max-pos",
-                "step": 0.1,
-                "validation": [["required"]]
-              }
-            }
-          ]
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number",
+            "label": "number",
+            "step": 0.1,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-min-zero",
+            "label": "number-min-zero",
+            "step": 0.1,
+            "min": 0,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-min",
+            "label": "number-min",
+            "step": 0.1,
+            "min": 17,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-max",
+            "label": "number-max",
+            "step": 0.1,
+            "max": 34,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "range",
+            "name": "number-minmax",
+            "label": "number-minmax",
+            "step": 0.1,
+            "min": 17,
+            "max": 34,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-default-zero",
+            "label": "number-default-zero",
+            "step": 0.1,
+            "value": 0,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-default",
+            "label": "number-default",
+            "step": 0.1,
+            "value": 17,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-exclusive-min-neg",
+            "min": -33.9,
+            "label": "number-exclusive-min-neg",
+            "step": 0.1,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-exclusive-min-zero",
+            "min": 0.1,
+            "label": "number-exclusive-min-zero",
+            "step": 0.1,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-exclusive-min-pos",
+            "min": 34.1,
+            "label": "number-exclusive-min-pos",
+            "step": 0.1,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-exclusive-max-neg",
+            "max": -34.1,
+            "label": "number-exclusive-max-neg",
+            "step": 0.1,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-exclusive-max-zero",
+            "max": -0.1,
+            "label": "number-exclusive-max-zero",
+            "step": 0.1,
+            "validation": [["required"]]
+          }
+        },
+        {
+          "$cmp": "FormKit",
+          "props": {
+            "type": "number",
+            "name": "number-exclusive-max-pos",
+            "max": 33.9,
+            "label": "number-exclusive-max-pos",
+            "step": 0.1,
+            "validation": [["required"]]
+          }
         }
       ]
     }

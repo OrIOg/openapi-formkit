@@ -1,10 +1,13 @@
 import { BaseParameterObject, DiscriminatorObject, ExternalDocumentationObject, ISpecificationExtension, ReferenceObject, SchemaObject as schema, XmlObject } from "openapi3-ts";
-import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit } from "@formkit/core"
+import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit, FormKitSchemaProps } from "@formkit/core"
 
 export interface Options {
     step: number,
-    inputsWrapper?: FormKitSchemaDOMNode
+    transformers: Transformer[]
 }
+
+export type Transformer = (param: Parameter, options: Options, item: FormKitItem) => void
+
 
 type TempOmitSchema = Omit<schema, 'exclusiveMinimum'|'exclusiveMaximum'>;
 
@@ -54,7 +57,7 @@ export interface Parameter extends Omit<BaseParameterObject, 'schema'> {
     schema: SchemaObject
 }
 
-export type FormKitItem = FormKitInput | FormKitGroup | FormKitSchemaDOMNode | FormKitSchemaFormKit
+export type FormKitItem = (FormKitInput | FormKitGroup | FormKitSchemaDOMNode | FormKitSchemaFormKit) & Record<string, any>
 
 export interface FormKitInput extends FormKitSchemaComponent {
     $cmp: 'FormKit',
@@ -106,7 +109,6 @@ export interface Route {
 }
 
 export type method = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options' | 'trace';
-
 
 
 //FIXME: Is there a better way ?

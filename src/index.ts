@@ -1,21 +1,15 @@
-import { Options } from './types/index.d';
+import { Options, Transformer } from './types/index.d';
 import SwaggerParser from "@apidevtools/swagger-parser"
 import Converter from './converters/converter';
 import { OpenAPIObject } from 'openapi3-ts';
 
 export { Converter }
 
-const defaultInputsWrapper = {
-    $el: 'div',
-    attrs: {
-        class: "formkit-inputs"
-    }
-}
-
-export async function Convert(src: string, options: Options = { step: 0.1, inputsWrapper: defaultInputsWrapper }) {
+export async function Convert(src: string, options?: Partial<Options>) {
     let parser = new SwaggerParser()
     let obj = await parser.dereference(src) as OpenAPIObject;
 
-    const converter = new Converter(options);
+    
+    const converter = new Converter({ ... { step: 0.1, transformers: [] }, ...options} as Options   );
     return converter.convert(obj);
 }
