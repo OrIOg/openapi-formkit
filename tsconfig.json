@@ -13,7 +13,7 @@
       "esModuleInterop": true,
       "lib": ["esnext"]
     },
-    "include": ["src/**/*.ts", "src/**/*.d.ts"],
-    "exclude": ["node_modules", "**/tests/*"]
+    "include": ["./src/**/*.ts", "./src/**/*.d.ts"],
+    "exclude": ["node", "**/tests/*"]
   }
   
