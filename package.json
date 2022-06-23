@@ -1,19 +1,22 @@
 {
   "name": "openapi-formkit",
-  "version": "0.2.5",
-  "description": "Transform an OpenAPI document to a VueFormulate JSON Form generation",
+  "version": "0.2.6",
+  "description": "Transform an OpenAPI document to a FormKit schema",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "author": "Thibault Poisson",
+  "author": {
+    "name": "Thibault Poisson",
+    "email": "thibault_poisson@orange.fr"
+  },
   "license": "MIT",
-  "files": [
-    "lib/**/*"
-  ],
+  "files": ["./lib/**/*"],
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "dev": "tsnd --respawn --files src/index.ts",
     "test": "jest",
     "build": "tsc"
   },
+  "keywords": ["OpenAPI", "FormKit", "Converter"],
   "devDependencies": {
     "@formkit/core": "^1.0.0-beta.6",
     "@types/jest": "^27.4.1",
