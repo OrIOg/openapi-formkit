@@ -1,6 +1,6 @@
 {
   "name": "openapi-formkit",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Transform an OpenAPI document to a FormKit schema",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -13,7 +13,10 @@
     "url": "https://github.com/OrIOg/openapi-formkit/"
   },
   "license": "MIT",
-  "files": ["./lib/**/*", "./src/types/**/*"],
+  "files": [
+    "./lib/**/*",
+    "./src/types/**/*"
+  ],
   "typings": "./lib/index.d.ts",
   "scripts": {
     "dev": "tsnd --respawn --files src/index.ts",
@@ -23,7 +26,11 @@
     "postbuild": "cp -R ./src/types ./lib/types",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["OpenAPI", "FormKit", "Converter"],
+  "keywords": [
+    "OpenAPI",
+    "FormKit",
+    "Converter"
+  ],
   "devDependencies": {
     "@formkit/core": "^1.0.0-beta.6",
     "@types/jest": "^27.4.1",
