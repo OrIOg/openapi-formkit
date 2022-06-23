@@ -1,5 +1,5 @@
-# OpenAPI VueFormulate
-Transform an OpenAPI document to a VueFormulate JSON Form generation
+# OpenAPI FormKit
+Transform an OpenAPI document to a FormKit schema
 
 > import { Convert } from 'openapi-formkit'    
 >
