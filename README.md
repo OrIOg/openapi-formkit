@@ -3,14 +3,14 @@ Transform an OpenAPI document to a FormKit schema
 
 > import { Convert } from 'openapi-formkit'    
 >
->// Helper function to convert from url or file openapi document
+>// Helper function to convert from url or file openapi document  
 >Convert(<url/path>, options)
 
 Or 
 
 > import { Converter } from 'openapi-formkit'    
 >
->// Convert a JS object representating a dereferenced OpenAPI document
+>// Convert a JS object representating a dereferenced OpenAPI document  
 >new Converter(options).convert(object)
 
 
