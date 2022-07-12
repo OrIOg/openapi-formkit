@@ -23,7 +23,7 @@
     "test": "jest",
     "build": "tsc",
     "prebuild": "npm run test",
-    "postbuild": "cp -R ./src/types ./lib/types",
+    "postbuild": "cp -R ./src/types/ ./lib/",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
