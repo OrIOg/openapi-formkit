@@ -1,12 +1,15 @@
 import { BaseParameterObject, DiscriminatorObject, ExternalDocumentationObject, ISpecificationExtension, ReferenceObject, SchemaObject as schema, XmlObject } from "openapi3-ts";
-import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit, FormKitSchemaProps } from "@formkit/core"
+import { FormKitSchemaComponent, FormKitSchemaDOMNode, FormKitSchemaFormKit } from "@formkit/core"
+
 
 export interface Options {
     step: number,
     transformers: Transformer[]
+    operationTransformers: OperationTransformer[]
 }
 
-export type Transformer = (param: Parameter, options: Options, item: FormKitItem) => void
+export type OperationTransformer = (path: string, op: method, options: Options, item: Route) => Route
+export type Transformer = (param: Parameter, options: Options, item: FormKitItem) => FormKitItem
 
 
 type TempOmitSchema = Omit<schema, 'exclusiveMinimum'|'exclusiveMaximum'>;
@@ -99,14 +102,8 @@ export interface UniversalProps {
     value?: any
 }
 
-export interface Route {
-    $cmp: "FormKit"
-    props: {
-        type: "form",
-        method: method
-    }
-    children: FormKitItem[]
-}
+export type Route = FormKitItem | FormKitItem[]
+
 
 export type method = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options' | 'trace';
 

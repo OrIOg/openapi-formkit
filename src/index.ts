@@ -9,8 +9,6 @@ export async function Convert(src: string, options?: Partial<Options>) {
     let parser = new SwaggerParser()
     let obj = await parser.dereference(src) as OpenAPIObject;
 
-    
-    const converter = new Converter({ ... { step: 0.1, transformers: [] }, ...options} as Options   );
+    const converter = new Converter(options as Options);
     return converter.convert(obj);
 }
-

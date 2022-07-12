@@ -5,8 +5,24 @@ import { convertEnum } from './enum';
 
 export default class Converter {
     protected options: Options;
-    constructor(options: Options) {
-        this.options = options;
+    constructor(options: Partial<Options>) {
+        this.options = { ... { 
+                step: 0.1,
+                transformers: [],
+                operationTransformers: [Converter.OperationToForm]
+            }, 
+        ...options } as Options;
+    }
+    
+    public static OperationToForm(path: string, op: method, options: Options, parameters: FormKitItem[]) {
+        return {
+            $cmp: "FormKit",
+            props: {
+                type: "form",
+                method: op
+            },
+            children: parameters
+        }
     }
 
     public convert(obj: OpenAPIObject) {
@@ -20,26 +36,18 @@ export default class Converter {
             
             let routes = {} as Record<method, Route>;
             for (const op of opTypes) {
+                if(!path[op]) continue
                 let parameters = [] as FormKitItem[];
-                if(path[op] && path[op]!.parameters) {
+
+                if(path[op]!.parameters) {
                     parameters = this.readParameters(path[op]!.parameters as ParameterObject[]);
                 }
-                if(path[op] && path[op]!.requestBody) {
+                
+                if(path[op]!.requestBody) {
                     parameters = this.readRequestBody(path[op]!.requestBody as RequestBodyObject);
                 }
 
-                if(parameters.length) {
-                    routes[op] = {
-                        $cmp: "FormKit",
-                        props: {
-                            type: "form",
-                            method: op
-                        },
-                        children: parameters
-                    }
-                    
-                }
-                    
+                routes[op] = this.applyOperationTransformers(route, op, parameters);    
             }
 
             pathsParameters[route] = routes
@@ -97,8 +105,16 @@ export default class Converter {
 
     public applyTransformers(parameter: Parameter, item: FormKitItem) {
         this.options.transformers.forEach(transformer => {
-            transformer(parameter, this.options, item)
+            item = transformer(parameter, this.options, item)
         })
+        return item
+    }
+
+    public applyOperationTransformers(path: string, op: method, item: Route) {
+        this.options.operationTransformers.forEach(transformer => {
+            item = transformer(path, op, this.options, item)
+        })
+        return item
     }
 
     public readParameters(parameters: ParameterObject[]): FormKitItem[] {
