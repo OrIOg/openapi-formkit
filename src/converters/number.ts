@@ -26,7 +26,7 @@ export function convertNumber(param: Parameter, options: Options): FormKitInput 
         max = max - (schema.exclusiveMaximum !== undefined ? (isInt ? 1 : options.step) : 0);
 
     let props = {
-        type: min!== undefined && max !== undefined ? 'range' : 'number',
+        type: min !== undefined && max !== undefined ? 'range' : 'number',
         name: param.name,
         label: schema.title || param.name,
         step: isInt ? 1 : options.step
