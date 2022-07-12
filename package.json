@@ -1,6 +1,6 @@
 {
   "name": "openapi-formkit",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "Transform an OpenAPI document to a FormKit schema",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
