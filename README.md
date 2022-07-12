@@ -1,22 +1,37 @@
 # OpenAPI FormKit
 Transform an OpenAPI document to a FormKit schema
 
-> import { Convert } from 'openapi-formkit'    
->
->// Helper function to convert from url or file openapi document  
->Convert(<url/path>, options)
+```typescript
+import { Convert } from 'openapi-formkit'    
 
-Or 
+// Helper function to convert from url or file openapi document  
+Convert(<url/path>, options)
+```
+Or
 
-> import { Converter } from 'openapi-formkit'    
->
->// Convert a JS object representating a dereferenced OpenAPI document  
->new Converter(options).convert(object)
+```typescript
+import { Converter } from 'openapi-formkit'    
+
+// Convert a JS object representating a dereferenced OpenAPI document  
+new Converter(options).convert(object)
+```  
 
 
 Options: 
-- step: Default step for number and range inputs
-- transformers: List of transformer function which apply to every parameters/object fields 
+- **step**: Default step for number and range inputs
+  - *default* : 0.1
+- **transformers**: List of transformer function which apply to every parameters/object fields
+  - *default* : [ ]
+  - *definition* :
+```typescript
+(param: Parameter, options: Options, item: FormKitItem) => FormKitItem
+```
+- **operationTransformers**: List of transformer function which apply to every operation
+  - *default* : [ Converter.OperationToForm ]
+  - *definition* : 
+```typescript
+(path: string, op: method, options: Options, item: Route) => Route
+```
 
 Passed arguments to a transformer function:
  - OpenAPI parameter or object field
