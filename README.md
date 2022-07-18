@@ -18,7 +18,7 @@ Implemented:
 Not implemented:
  - *anyOf* keyword
  - *oneOf* keyword
- - *allOf* keyword (Only work with one item)
+ - *allOf* keyword
  - *not* keyword
  - And more
 ___
