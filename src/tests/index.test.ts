@@ -4,6 +4,7 @@ import expectedOutputString from "./docs/expected/string.json"
 import expectedOutputNumber from "./docs/expected/number.json"
 import expectedOutputTransformer from "./docs/expected/transformer.json"
 import expectedOutputOperationTransformer from "./docs/expected/operationTransformer.json"
+import expectedOutputCombinatory from "./docs/expected/combinatory.json"
 import { FormKitItem, Options, Parameter } from "../types"
 
 test("String test", async () => {
@@ -33,4 +34,8 @@ test("Operation transformers test", async () => {
 
 test("Full openapi test", async () => {
   expect(await Convert("./src/tests/docs/openapi.json")).toStrictEqual(expectedOutputOpenAPI);
+});
+
+test("Combinatory keywords test", async () => {
+  expect(await Convert("./src/tests/docs/combinatory.json")).toStrictEqual(expectedOutputCombinatory);
 });

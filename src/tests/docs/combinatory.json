@@ -1,0 +1,57 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Simple API overview",
+      "version": "1.0"
+    },
+    "paths": {
+        "/tests/combinatory": {
+            "post": {
+                "operationId": "combinatory",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_combinatory_post"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        }
+    },
+    
+    "components": {
+        "schemas": {
+            "Body_combinatory_post": {
+                "title": "Body_combinatory_post",
+                "required": ["matching_parameters"],
+                "type": "object",
+                "properties": {
+                    "matching_parameters": {
+                        "$ref": "#/components/schemas/MatchingParameters"
+                    }
+                }
+            },
+            "MatchingParameters": {
+                "title": "ImageMatchingParameters",
+                "type": "object",
+                "properties": {
+                    "match_colors_with": {
+                        "allOf": [{
+                            "$ref": "#/components/schemas/Match"
+                        }],
+                        "default": 2
+                    }
+                }
+            },
+            "Match": {
+                "title": "Match",
+                "enum": [0, 1, 2, 3],
+                "type": "integer",
+                "description": "An enumeration."
+            }
+        }
+    }
+}

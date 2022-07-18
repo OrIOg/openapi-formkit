@@ -1,6 +1,7 @@
 import { ParameterObject, PathItemObject, RequestBodyObject, OpenAPIObject } from 'openapi3-ts';
 import { convertBoolean, convertNumber, convertString } from '.';
 import { FormKitGroup, FormKitItem, Parameter, FormKitInput, Options, method, Route, UniversalProps,SchemaObject } from '../types';
+import { convertAllOf } from './combinaison-keywords';
 import { convertEnum } from './enum';
 
 export default class Converter {
@@ -58,6 +59,10 @@ export default class Converter {
 
     public readParameter(param: Parameter): FormKitItem | undefined {
         const schema = param.schema;
+
+        if(schema.allOf)
+            return convertAllOf(param, this.options)
+
         if(schema.enum) return convertEnum(param, this.options);
         switch (schema!.type) {
             case 'number':

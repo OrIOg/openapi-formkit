@@ -1,0 +1,42 @@
+{
+  "/tests/combinatory": {
+    "post":  {
+      "$cmp": "FormKit",
+      "children":  [
+         {
+          "$formkit": "group",
+          "children":  [
+             {
+              "$cmp": "FormKit",
+              "props":  {
+                "help": "An enumeration.",
+                "label": "Match",
+                "name": "match_colors_with",
+                "options":  [
+                  0,
+                  1,
+                  2,
+                  3
+                ],
+                "type": "select",
+                "value": 2
+              }
+            }
+          ],
+          "name": "matching_parameters",
+          "props":  {
+            "validation":  [
+               [
+                "required"
+              ]
+            ]
+          }
+        }
+      ],
+      "props":  {
+        "method": "post",
+        "type": "form"
+      }
+    }
+  }
+}
