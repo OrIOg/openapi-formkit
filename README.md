@@ -1,6 +1,28 @@
 # OpenAPI FormKit
 Transform an OpenAPI document to a FormKit schema
 
+***WARNING: This package is still under development.***  
+Implemented:
+  - Basic types: 
+    - Booleans
+    - Numbers
+      - Float
+      - Integer
+    - String
+      - text
+      - file
+      - special: telephone, email, url, date/date-time, password
+    - Object
+
+
+Not implemented:
+ - *anyOf* keyword
+ - *oneOf* keyword
+ - *allOf* keyword (Only work with one item)
+ - *not* keyword
+ - And more
+___
+
 ```typescript
 import { Convert } from 'openapi-formkit'    
 
@@ -15,8 +37,10 @@ import { Converter } from 'openapi-formkit'
 // Convert a JS object representating a dereferenced OpenAPI document  
 new Converter(options).convert(object)
 ```  
-
-
+Return a promise with the result.  
+___
+  
+  
 Options: 
 - **step**: Default step for number and range inputs
   - *default* : 0.1
@@ -37,6 +61,3 @@ Passed arguments to a transformer function:
  - OpenAPI parameter or object field
  - The options passed to the converter
  - The item to transform
-
-
-Return a promise with the result.
