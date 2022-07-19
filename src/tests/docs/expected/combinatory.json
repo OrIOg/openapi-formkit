@@ -1,35 +1,22 @@
 {
-  "/tests/combinatory": {
+  "/tests/allOf-unique": {
     "post":  {
       "$cmp": "FormKit",
       "children":  [
          {
-          "$formkit": "group",
-          "children":  [
-             {
-              "$cmp": "FormKit",
-              "props":  {
-                "help": "An enumeration.",
-                "label": "Match",
-                "name": "match_colors_with",
-                "options":  [
-                  0,
-                  1,
-                  2,
-                  3
-                ],
-                "type": "select",
-                "value": 2
-              }
-            }
-          ],
-          "name": "matching_parameters",
+          "$cmp": "FormKit",
           "props":  {
-            "validation":  [
-               [
-                "required"
-              ]
-            ]
+            "help": "An enumeration.",
+            "label": "Match",
+            "name": "match_colors_with",
+            "options":  [
+              0,
+              1,
+              2,
+              3
+            ],
+            "type": "select",
+            "value": 2
           }
         }
       ],
@@ -38,5 +25,72 @@
         "type": "form"
       }
     }
-  }
+  },
+  "/tests/allOf-multiple": {
+    "post": {
+      "$cmp": "FormKit",
+      "children": [
+       {
+         "$formkit": "group",
+           "children": [
+             {
+               "$cmp": "FormKit",
+               "props": {
+                 "label": "name",
+                 "name": "name",
+                 "type": "text",
+                 "validation": [
+                   [
+                     "required"
+                   ]
+                 ]
+               }
+             },
+             {
+               "$cmp": "FormKit",
+               "props": {
+                 "label": "age",
+                 "min": 0,
+                 "name": "age",
+                 "step": 1,
+                 "type": "number",
+                 "validation": [
+                   [
+                     "required"
+                   ]
+                 ]
+               }
+             },
+             {
+               "$cmp": "FormKit",
+               "props": {
+                 "label": "evil",
+                 "name": "evil",
+                 "type": "checkbox"
+               }
+             },
+             {
+               "$cmp": "FormKit",
+               "props": {
+                 "label": "goodboi",
+                 "name": "goodboi",
+                 "type": "checkbox",
+                 "validation": [
+                   [
+                     "required"
+                   ]
+                 ]
+               }
+             }
+           ],
+           "name": "match_colors_with",
+           "props": {}
+         }
+       ],
+       "props": {
+         "method": "post",
+         "type": "form"
+       }
+     }
+   }
 }

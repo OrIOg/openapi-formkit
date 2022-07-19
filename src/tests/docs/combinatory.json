@@ -5,14 +5,29 @@
       "version": "1.0"
     },
     "paths": {
-        "/tests/combinatory": {
+        "/tests/allOf-unique": {
             "post": {
                 "operationId": "combinatory",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/Body_combinatory_post"
+                                "$ref": "#/components/schemas/MatchingParameters"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/tests/allOf-multiple": {
+            "post": {
+                "operationId": "combinatory",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MultipleAllOf"
                             }
                         }
                     },
@@ -24,19 +39,10 @@
     
     "components": {
         "schemas": {
-            "Body_combinatory_post": {
-                "title": "Body_combinatory_post",
-                "required": ["matching_parameters"],
-                "type": "object",
-                "properties": {
-                    "matching_parameters": {
-                        "$ref": "#/components/schemas/MatchingParameters"
-                    }
-                }
-            },
             "MatchingParameters": {
                 "title": "ImageMatchingParameters",
                 "type": "object",
+                "required": ["matching_parameters"],
                 "properties": {
                     "match_colors_with": {
                         "allOf": [{
@@ -51,6 +57,58 @@
                 "enum": [0, 1, 2, 3],
                 "type": "integer",
                 "description": "An enumeration."
+            },
+
+
+            "MultipleAllOf": {
+                "title": "ImageMatchingParameters",
+                "type": "object",
+                "required": ["matching_parameters"],
+                "properties": {
+                    "match_colors_with": {
+                        "allOf": [{
+                            "$ref": "#/components/schemas/Cat"
+                        },{
+                            "$ref": "#/components/schemas/Dog"
+                        }]
+                    }
+                }
+            },
+            "Cat": {
+                "type": "object",
+                "required": ["name", "age", "evil"],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "exclusiveMinimum": 1
+                    },
+                    "age": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "format": "int32"
+                    },
+                    "evil": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Dog": {
+                "type": "object",
+                "required": ["name", "age", "goodboi"],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "exclusiveMinimum": 1
+                    },
+                    "age": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "format": "int32"
+                    },
+                    "goodboi": {
+                        "type": "boolean"
+                    }
+                }
             }
         }
     }

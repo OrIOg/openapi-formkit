@@ -71,7 +71,7 @@ export interface FormKitInput extends FormKitSchemaComponent {
 export interface FormKitGroup extends FormKitSchemaFormKit {
     $formkit: 'group',
     name: String,
-    children: Array<FormKitItem>
+    children?: Array<FormKitItem>
     props: UniversalProps
 }
 
